@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-
+from scipy.stats import norm
 
 chat_id = 683820405 # Ваш chat ID, не меняйте название переменной
 
@@ -13,7 +13,7 @@ def solution(x_success: int,
     p = (x_success + y_success) / (x_cnt + y_cnt)
     SE = (p * (1 - p) * (1 / x_cnt + 1 / y_cnt)) ** 0.5
     z = (p2 - p1) / SE
-    z_critical = 2.17
+    alpha = 0.03
     
     # Проверка условия
-    return abs(z) > z_critical
+    return abs(z) > norm.ppf(1 - alpha/2)
