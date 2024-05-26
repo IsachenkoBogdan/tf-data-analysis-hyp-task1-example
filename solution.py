@@ -8,12 +8,8 @@ def solution(x_success: int,
              x_cnt: int, 
              y_success: int, 
              y_cnt: int) -> bool:
-    p1 = x_success / x_cnt
-    p2 = y_success / y_cnt
-    p = (x_success + y_success) / (x_cnt + y_cnt)
-    SE = (p * (1 - p) * (1 / x_cnt + 1 / y_cnt)) ** 0.5
-    z = (p2 - p1) / SE
     alpha = 0.03
-    
-    # Проверка условия
-    return abs(z) > norm.ppf(1 - alpha/2)
+
+    table = [[x_success, x_cnt - x_success],
+             [y_success, y_cnt - y_success]]
+    return sps.fisher_exact(table, alternative='greater')[1] < alpha
