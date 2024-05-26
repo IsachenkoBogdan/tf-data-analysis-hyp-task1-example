@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import scipy.stats as sps
+from statsmodels.stats.proportion import proportions_ztest
 
 chat_id = 683820405 # Ваш chat ID, не меняйте название переменной
 
@@ -9,7 +9,4 @@ def solution(x_success: int,
              y_success: int, 
              y_cnt: int) -> bool:
     alpha = 0.03
-
-    table = [[x_success, x_cnt - x_success],
-             [y_success, y_cnt - y_success]]
-    return sps.fisher_exact(table, alternative='greater')[1] < alpha
+    return proportions_ztest(np.array([x_success, y_success]), np.array([x_cnt, y_cnt]), alternative='greater')[1] < alpha
