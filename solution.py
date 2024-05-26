@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from scipy.stats import norm
+import scipy.stats as sps
 
 chat_id = 683820405 # Ваш chat ID, не меняйте название переменной
 
@@ -12,4 +12,4 @@ def solution(x_success: int,
 
     table = [[x_success, x_cnt - x_success],
              [y_success, y_cnt - y_success]]
-    return sps.fisher_exact(table, alternative='less')[1] < alpha
+    return sps.fisher_exact(table, alternative='greater')[1] < alpha
