@@ -16,4 +16,4 @@ def solution(x_success: int,
     alpha = 0.03
 
     # Проверка условия
-    return norm.cdf(z) < alpha
+    return z > norm.ppf(1 - alpha)
