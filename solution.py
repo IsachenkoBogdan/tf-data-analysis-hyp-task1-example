@@ -12,4 +12,4 @@ def solution(x_success: int,
 
     table = [[x_success, x_cnt - x_success],
              [y_success, y_cnt - y_success]]
-    return sps.fisher_exact(table, alternative='greater')[1] < alpha
+    return sps.fisher_exact(table, alternative='less')[1] < alpha
